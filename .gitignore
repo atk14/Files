@@ -1,2 +1,4 @@
 !temp/temp/README
 test/temp/*
+composer.lock
+vendor/*
