@@ -14,15 +14,15 @@ Files is just a bunch of static functions.
 
 To recursively delete a directory
 
-   $items_deleted = Files::RecursiveUnlinkDir("/path/to/a/dir");
+    $items_deleted = Files::RecursiveUnlinkDir("/path/to/a/dir");
 
 To determine a file type
 
-   $mime_type = Files::DetermineFileType("/path/to/a/file"); // "image/jpg"
+    $mime_type = Files::DetermineFileType("/path/to/a/file"); // "image/jpg"
 
 To write a content to a temporary file
 
-   $temp_filename = Files::WriteToTemp($some_content);
+    $temp_filename = Files::WriteToTemp($some_content);
 
 And so on.
 
