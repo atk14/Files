@@ -205,4 +205,117 @@ class TcFiles extends TcBase{
 		$files_deleted = Files::RecursiveUnlinkDir(TEMP . "/to_be_deleted");
 		$this->assertEquals(5,$files_deleted);
 	}
+
+	function test_FindFiles(){
+		$files = Files::FindFiles("sample_files/");
+		$this->assertTrue(sizeof($files)>10);
+		$this->assertTrue(in_array('sample_files/sample.jpg',$files));
+
+		$files = Files::FindFiles("./sample_files/",array(
+			"pattern" => '/^sample\.(p..|jpg)$/'
+		));
+		$this->assertEquals(array(
+			'./sample_files/sample.jpg',
+			'./sample_files/sample.pdf',
+			'./sample_files/sample.png',
+			'./sample_files/sample.ppt',
+		),$files);
+
+		// --- invert_pattern
+
+		$files = Files::FindFiles("./sample_files/",array(
+			"pattern" => '/^sample\.(p..|jpg)$/',
+			"invert_pattern" => '/\.ppt/'
+		));
+		$this->assertEquals(array(
+			'./sample_files/sample.jpg',
+			'./sample_files/sample.pdf',
+			'./sample_files/sample.png',
+		),$files);
+
+		// --- hidden files are included
+
+		touch('temp/.hidden_file.txt');
+
+		$files = Files::FindFiles("temp/",array(
+			"pattern" => '/^.*\.txt$/'
+		));
+		$this->assertEquals(array('temp/.hidden_file.txt'),$files);
+
+		$files = Files::FindFiles("temp/");
+		$this->assertTrue(in_array('temp/.hidden_file.txt',$files));
+
+		$files = Files::FindFiles("temp/",array(
+			"pattern" => '/^.*\.txt$/',
+			"invert_pattern" => '/^\./',
+		));
+		$this->assertEquals(array(),$files);
+		
+		unlink('temp/.hidden_file.txt');
+
+
+		// ----
+
+		touch('temp/application.log',time() - 60);
+
+		$files = Files::FindFiles("temp/",array(
+			"pattern" => '/^.*\.log$/'
+		));
+		$this->assertEquals(array('temp/application.log'),$files);
+
+		// min_mtime
+		$files = Files::FindFiles("temp/",array(
+			"pattern" => '/^.*\.log$/',
+			"min_mtime" => time() - 30
+		));
+		$this->assertEquals(array(),$files);
+		//
+		$files = Files::FindFiles("temp/",array(
+			"pattern" => '/^.*\.log$/',
+			"min_mtime" => time() - 60
+		));
+		$this->assertEquals(array('temp/application.log'),$files);
+		// 
+		$files = Files::FindFiles("temp/",array(
+			"pattern" => '/^.*\.log$/',
+			"min_mtime" => time() - 120
+		));
+		$this->assertEquals(array('temp/application.log'),$files);
+
+		// max_mtime
+		$files = Files::FindFiles("temp/",array(
+			"pattern" => '/^.*\.log$/',
+			"max_mtime" => time() - 120
+		));
+		$this->assertEquals(array(),$files);
+		//
+		$files = Files::FindFiles("temp/",array(
+			"pattern" => '/^.*\.log$/',
+			"max_mtime" => time() - 60
+		));
+		$this->assertEquals(array('temp/application.log'),$files);
+		//
+		$files = Files::FindFiles("temp/",array(
+			"pattern" => '/^.*\.log$/',
+			"max_mtime" => time() - 30
+		));
+		$this->assertEquals(array('temp/application.log'),$files);
+
+		// both min_mtime & max_mtime
+		$files = Files::FindFiles("temp/",array(
+			"pattern" => '/^.*\.log$/',
+			"min_mtime" => time() - 120,
+			"max_mtime" => time() - 30
+		));
+		$this->assertEquals(array('temp/application.log'),$files);
+		//
+		$files = Files::FindFiles("temp/",array(
+			"pattern" => '/^.*\.log$/',
+			"min_mtime" => time() - 180,
+			"max_mtime" => time() - 120
+		));
+		$this->assertEquals(array(),$files);
+
+		unlink("temp/application.log");
+	}
 }
