@@ -31,7 +31,7 @@ TODO: The functions list needs to be completed.
 Installation
 ------------
 
-Use the Composer to install the panel.
+Use the Composer to install Files.
 
     cd path/to/your/project/
     composer require atk14/files dev-master
