@@ -384,6 +384,9 @@ class Files{
 
 		$dir .= "/";
 		$dir_handle = opendir($dir);
+		if(!$dir_handle){
+			return 0;
+		}
 		while(($item = readdir($dir_handle))!==false){
 			if($item=="." || $item==".." || $item==""){
 				continue;
@@ -538,13 +541,34 @@ class Files{
 	}
 
 	/**
+	 * Returns the temporary directory
+	 *
+	 * ```
+	 * $tmp_dir = Files::GetTempDir(); // e.g. "/tmp"
+	 * ```
+	 *
+	 * It is NOT ensured whether returned is ending with "/" or not.
+	 *
+	 * @return string
+	 */
+	static function GetTempDir(){
+		$temp_dir = (defined("TEMP") && strlen("TEMP")) ? (string)TEMP : sys_get_temp_dir();
+		if(!strlen($temp_dir)){
+			$temp_dir = "/tmp";
+		}
+		return $temp_dir;
+	}
+
+	/**
 	 * Returns a filename for a new temporary file.
 	 *
 	 * @return string name of the newly created file
 	 */
-	static function GetTempFilename(){
-		$temp_filename = defined("TEMP") ? TEMP : "/tmp";
-		$temp_filename .= "/files_tmp_".uniqid("",true)."";
+	static function GetTempFilename($prefix = "files_tmp_"){
+		// Might be better, but oddly it breaks tests
+		//return tempnam(self::GetTempDir(), $prefix);
+
+		$temp_filename = self::GetTempDir() . "/files_tmp_".uniqid("",true);
 		return $temp_filename;
 	}
 
@@ -612,7 +636,7 @@ class Files{
 			"doc" =>				array("application/msword","application/vnd.ms-office"),
 			"ppt" =>				array("application/vnd.ms-powerpoint","application/vnd.ms-office","application/msword"),
 			"jpg|jpeg" =>		array("image/jpeg","image/jpg"),
-			"svg" =>				array("image/svg+xml","text/plain"),
+			"svg" =>				array("image/svg+xml","image/svg","text/plain"),
 			"bmp" =>				array("image/bmp","image/x-bmp","image/x-ms-bmp","application/octet-stream"),
 			"eps" =>				array("application/postscript","application/eps"),
 			"csv" =>				array("text/csv","text/plain"),
@@ -649,8 +673,8 @@ class Files{
 			"invert_pattern" => null, // '/^\./' - do not find files starting with dot
 			"min_mtime" => null, // time() - 2 * 60 * 60
 			"max_mtime" => null, // time() - 60 * 60
-			
-			// "maxdepth" => null // TODO: add maxdepth like in system command find
+
+			"maxdepth" => null // TODO: add maxdepth like in system command find
 		);
 
 		if(!preg_match('/\/$/',$directory)){
@@ -661,7 +685,11 @@ class Files{
 		$invert_pattern = $options["invert_pattern"];
 		$min_mtime = $options["min_mtime"];
 		$max_mtime = $options["max_mtime"];
+		$maxdepth = $options["maxdepth"];
 
+		if(isset($maxdepth) && $maxdepth<=0){
+			return array();
+		}
 
 		// getting file list
 		$files = array();
@@ -679,8 +707,15 @@ class Files{
 			$_f = $file; // "application.log"
 			$file = "$directory$file"; // "./log/application.log"
 
+			if(is_dir($file) && !is_link($file)){
+				$_options = $options;
+				if(isset($_options["maxdepth"])){ $_options["maxdepth"]--; }
+				foreach(self::FindFiles($file,$_options) as $_file){
+					$out[] = $_file;
+				}
+			}
+
 			if(!is_file($file)){
-				// TODO: also find files in a subdirectory
 				continue;
 			}
 		
