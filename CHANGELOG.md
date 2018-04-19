@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2] - 2018-04-19
+
+### Added
+- Option "maxdepth" added to Files::FindFiles()
+- Added new method Files::GetTempDir()
+
 ## [1.1] - 2017-05-02
 
 ### Added
