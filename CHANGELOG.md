@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.3] - 2018-05-29
+
+### Added
+- Added new method Files::MkdirForFile()
+
 ## [1.2] - 2018-04-19
 
 ### Added
