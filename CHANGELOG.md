@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2019-07-03
+
+- Files::GetTempFilename() fixed (filename prefix was not considered)
+
 ## [1.3] - 2018-05-29
 
 ### Added
