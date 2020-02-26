@@ -1,6 +1,16 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4] - 2020-02-26
+
+- Added methods for setting and getting default file and directory permissions
+  - Files::SetDefaultFilePerms()
+  - Files::GetDefaultFilePerms()
+  - Files::SetDefaultDirPerms()
+  - Files::GetDefaultDirPerms()
+- Added method Files::NormalizeFilePerms() (works for a file or directory)
+- Method Files::GetFileContent() fixed
+
 ## [1.3.1] - 2019-07-03
 
 - Files::GetTempFilename() fixed (filename prefix was not considered)
