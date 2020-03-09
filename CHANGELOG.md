@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2020-03-09
+
+- Added constants FILES_DEFAULT_FILE_PERMS and FILES_DEFAULT_DIR_PERMS
+
 ## [1.4] - 2020-02-26
 
 - Added methods for setting and getting default file and directory permissions
