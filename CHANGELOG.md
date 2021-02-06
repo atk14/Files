@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.5] - 2021-02-06
+
+- Added methods Files::TouchFile() and Files::EmptyFile()
+
 ## [1.4.2] - 2020-03-09
 
 - Constants FILES_DEFAULT_FILE_PERMS and FILES_DEFAULT_DIR_PERMS are not defined to the default values when they are not defined
