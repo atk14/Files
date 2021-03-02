@@ -265,10 +265,10 @@ class TcFiles extends TcBase{
 		foreach(array(
 			"jpg" => "image/jpeg",
 			"png" => "image/png",
-			"png" => "image/png",
 			"gif" => "image/gif",
 			"tiff" => "image/tiff",
 			"bmp" => "image/bmp",
+			"webp" => "image/webp",
 
 			"eps" => "application/postscript",
 			"ai" => "application/postscript",
