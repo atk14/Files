@@ -24,6 +24,13 @@ class TcFiles extends TcBase{
 		$this->assertEquals(325,$width);
 		$this->assertEquals(448,$height);
 
+		$image = Files::GetFileContent("sample_files/sample.webp",$err,$err_str);
+		$this->assertEquals(2358,strlen($image));
+		$this->assertEquals("c417b6553db97185609e3dc5925d8a42",md5($image));
+		list($width,$height) = Files::GetImageSize($image,$err,$err_str);
+		$this->assertEquals(50,$width);
+		$this->assertEquals(38,$height);
+
 		$hlava = "xxxxxxxxxxxxxxxxx";
 		$this->assertNull(Files::GetImageSize($hlava,$err,$err_str));
 	}
