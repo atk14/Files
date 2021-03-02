@@ -268,7 +268,7 @@ class TcFiles extends TcBase{
 			"gif" => "image/gif",
 			"tiff" => "image/tiff",
 			"bmp" => "image/bmp",
-			"webp" => "image/webp",
+			"webp" => PHP_VERSION_ID<70000 ? "application/octet-stream" : "image/webp",
 
 			"eps" => "application/postscript",
 			"ai" => "application/postscript",
