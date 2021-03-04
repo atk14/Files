@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.1] - 2021-03-04
+
+- Method Files::GetImageSize() fixed for PHP8
+
 ## [1.6] - 2021-03-04
 
 - Added method Files::GetImageSizeByContent()
