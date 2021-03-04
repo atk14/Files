@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6] - 2021-03-04
+
+- Added method Files::GetImageSizeByContent()
+- Method Files::GetImageSize() accepts filename as the first parameter, but the obsolete usage is preserved - It gonna be BC BREAK!
+
 ## [1.5] - 2021-02-06
 
 - Added methods Files::TouchFile() and Files::EmptyFile()
