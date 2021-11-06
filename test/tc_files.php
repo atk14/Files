@@ -337,6 +337,10 @@ class TcFiles extends TcBase{
 				"mime_types" => array("video/mp4"),
 			),
 			array(
+				"urls" => array("https://filesamples.com/samples/video/mkv/sample_960x540.mkv"),
+				"mime_types" => array("video/x-matroska"),
+			),
+			array(
 				"urls" => array("https://github.com/appium-boneyard/sample-code/blob/master/sample-code/apps/ContactManager/ContactManager.apk?raw=true"),
 				"mime_types" => array("application/java-archive", "application/jar"),
 			),
