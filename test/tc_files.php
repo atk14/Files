@@ -332,14 +332,25 @@ class TcFiles extends TcBase{
 		}
 
 		foreach(array(
-			"video/mp4" => "https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4",
-			"application/java-archive" => "https://github.com/appium-boneyard/sample-code/blob/master/sample-code/apps/ContactManager/ContactManager.apk?raw=true",
-		) as $mime_type => $url){
-			$uf = new UrlFetcher($url);
-			$this->assertTrue($uf->found(),"$url");
-			$file = Files::WriteToTemp($uf->getContent());
-			$this->assertEquals($mime_type,Files::DetermineFileType($file),"$url");
-			unlink($file);
+			array(
+				"urls" => array("https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4"),
+				"mime_types" => array("video/mp4"),
+			),
+			array(
+				"urls" => array("https://github.com/appium-boneyard/sample-code/blob/master/sample-code/apps/ContactManager/ContactManager.apk?raw=true"),
+				"mime_types" => array("application/java-archive", "application/jar"),
+			),
+		) as $item){
+			$urls = $item["urls"];
+			$mime_types = $item["mime_types"];
+			foreach($urls as $url){
+				$uf = new UrlFetcher($url);
+				$this->assertTrue($uf->found(),"$url");
+				$file = Files::WriteToTemp($uf->getContent());
+				$mime_type = Files::DetermineFileType($file);
+				$this->assertTrue(in_array($mime_type,$mime_types),"$url - $mime_type not in [".join(", ",$mime_types)."]");
+				unlink($file);
+			}
 		}
 	}
 
