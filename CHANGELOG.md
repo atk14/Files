@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.2] - 2021-11-06
+
+- 4f5d6f6 - Proper mime type detection of a jar file (application/java-archive)
+- 9f97cd0 - Proper mime type detection of an apk file (application/vnd.android.package-archive)
+- 21602d1 - Better SVG files recognition
+
 ## [1.6.1] - 2021-03-04
 
 - Method Files::GetImageSize() fixed for PHP8
