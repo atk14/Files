@@ -1,5 +1,6 @@
 <?php
 class TcFiles extends TcBase{
+
 	function test_get_file_content(){
 		$content = Files::GetFileContent("test.txt",$err,$err_str);
 		$this->assertFalse($err);
@@ -328,6 +329,17 @@ class TcFiles extends TcBase{
  		) as $file => $mime_type){
 			$file = __DIR__."/sample_files/sample.$file";
 			$this->assertEquals($mime_type,Files::DetermineFileType($file),$file);
+		}
+
+		foreach(array(
+			"video/mp4" => "https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4",
+			"application/java-archive" => "https://github.com/appium-boneyard/sample-code/blob/master/sample-code/apps/ContactManager/ContactManager.apk?raw=true",
+		) as $mime_type => $url){
+			$uf = new UrlFetcher($url);
+			$this->assertTrue($uf->found(),"$url");
+			$file = Files::WriteToTemp($uf->getContent());
+			$this->assertEquals($mime_type,Files::DetermineFileType($file),"$url");
+			unlink($file);
 		}
 	}
 
