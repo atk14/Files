@@ -333,6 +333,18 @@ class TcFiles extends TcBase{
 
 		foreach(array(
 			array(
+				"urls" => array("https://file-examples-com.github.io/uploads/2018/04/file_example_MOV_480_700kB.mov"),
+				"mime_types" => array("video/quicktime"),
+			),
+			array(
+				"urls" => array("https://filesamples.com/samples/video/wmv/sample_640x360.wmv"),
+				"mime_types" => array("video/x-ms-asf"),
+			),
+			array(
+				"urls" => array("https://file-examples-com.github.io/uploads/2018/04/file_example_AVI_480_750kB.avi"),
+				"mime_types" => array("video/x-msvideo"),
+			),
+			array(
 				"urls" => array("https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4"),
 				"mime_types" => array("video/mp4"),
 			),
