@@ -341,17 +341,24 @@ class TcFiles extends TcBase{
 				"mime_types" => array("video/x-matroska"),
 			),
 			array(
-				"urls" => array("https://github.com/appium-boneyard/sample-code/blob/master/sample-code/apps/ContactManager/ContactManager.apk?raw=true"),
-				"mime_types" => array("application/java-archive", "application/jar"),
+				"urls" => array(
+					"https://github.com/appium-boneyard/sample-code/blob/master/sample-code/apps/ContactManager/ContactManager.apk?raw=true",
+					"https://github.com/katalon-studio-samples/android-mobile-tests/blob/master/androidapp/APIDemos.apk?raw=true",
+					"https://github.com/appium/sample-apps/blob/master/pre-built/selendroid-test-app.apk?raw=true"
+				),
+				"mime_types" => array("application/vnd.android.package-archive"),
 			),
 		) as $item){
 			$urls = $item["urls"];
 			$mime_types = $item["mime_types"];
 			foreach($urls as $url){
+				$filename = $url;
+				$filename = preg_replace('/\?.*$/','',$filename);
+				$filename = preg_replace('/^.*\//','',$filename);
 				$uf = new UrlFetcher($url);
 				$this->assertTrue($uf->found(),"$url");
 				$file = Files::WriteToTemp($uf->getContent());
-				$mime_type = Files::DetermineFileType($file);
+				$mime_type = Files::DetermineFileType($file,array("original_filename" => $filename));
 				$this->assertTrue(in_array($mime_type,$mime_types),"$url - $mime_type not in [".join(", ",$mime_types)."]");
 				unlink($file);
 			}
