@@ -858,7 +858,8 @@ class Files{
 			"eps" =>				array("application/postscript","application/eps"),
 			"csv" =>				array("text/csv","text/plain"),
 			"docx" => 			array("application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/zip"),
-			"apk" =>				array("application/vnd.android.package-archive","application/jar","application/java-archive")
+			"apk" =>				array("application/vnd.android.package-archive","application/java-archive","application/jar"),
+			"jar" =>				array("application/java-archive","application/jar"),
 		);
 
 		foreach($tr_table as $suffixes => $mime_types){

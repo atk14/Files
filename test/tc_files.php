@@ -348,6 +348,10 @@ class TcFiles extends TcBase{
 				),
 				"mime_types" => array("application/vnd.android.package-archive"),
 			),
+			array(
+				"urls" => array("https://github.com/MeetMe/AppRate/blob/master/AppRateDownloads/AppRate_0.8.jar?raw=true"),
+				"mime_types" => array("application/java-archive"),
+			)
 		) as $item){
 			$urls = $item["urls"];
 			$mime_types = $item["mime_types"];
