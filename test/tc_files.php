@@ -333,7 +333,7 @@ class TcFiles extends TcBase{
 
 		foreach(array(
 			array(
-				"urls" => array("https://file-examples-com.github.io/uploads/2018/04/file_example_MOV_480_700kB.mov"),
+				"urls" => array("https://filesamples.com/samples/video/mov/sample_960x540.mov"),
 				"mime_types" => array("video/quicktime"),
 			),
 			array(
@@ -341,11 +341,11 @@ class TcFiles extends TcBase{
 				"mime_types" => array("video/x-ms-asf"),
 			),
 			array(
-				"urls" => array("https://file-examples-com.github.io/uploads/2018/04/file_example_AVI_480_750kB.avi"),
+				"urls" => array("https://filesamples.com/samples/video/avi/sample_640x360.avi"),
 				"mime_types" => array("video/x-msvideo"),
 			),
 			array(
-				"urls" => array("https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_480_1_5MG.mp4"),
+				"urls" => array("https://filesamples.com/samples/video/mp4/sample_640x360.mp4"),
 				"mime_types" => array("video/mp4"),
 			),
 			array(
