@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.3] - 2022-09-08
+
+* d6e2ed5 - Added mime type detection for AVIF images
+
 ## [1.6.2] - 2021-11-06
 
 - 4f5d6f6 - Proper mime type detection of a jar file (application/java-archive)
