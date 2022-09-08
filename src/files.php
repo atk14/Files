@@ -855,6 +855,7 @@ class Files{
 			"svg" =>				array("image/svg+xml","image/svg","text/html","text/plain"),
 			"bmp" =>				array("image/bmp","image/x-bmp","image/x-ms-bmp","application/octet-stream"),
 			"webp" =>				array("image/webp","image/x-webp"),
+			"avif" =>				array("image/avif","application/octet-stream"),
 			"eps" =>				array("application/postscript","application/eps"),
 			"csv" =>				array("text/csv","text/plain"),
 			"docx" => 			array("application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/zip"),

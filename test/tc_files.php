@@ -306,6 +306,7 @@ class TcFiles extends TcBase{
 			"tiff" => "image/tiff",
 			"bmp" => "image/bmp",
 			"webp" => PHP_VERSION_ID<70000 ? "application/octet-stream" : "image/webp",
+			"avif" => "image/avif",
 
 			"eps" => "application/postscript",
 			"ai" => "application/postscript",
