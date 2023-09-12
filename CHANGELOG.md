@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.4] - 2023-09-12
+
+* 3b50949 - Added method Files::WriteToCacheFile()
+* bce9189 - Added method Files::CopyToTemp()
+* 756088f - Detection of a apk file improved
+
 ## [1.6.3] - 2022-09-08
 
 * d6e2ed5 - Added mime type detection for AVIF images
