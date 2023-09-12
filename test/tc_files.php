@@ -334,19 +334,19 @@ class TcFiles extends TcBase{
 
 		foreach(array(
 			array(
-				"urls" => array("https://filesamples.com/samples/video/mov/sample_960x540.mov"),
+				"urls" => array("https://github.com/projectivetech/media-samples/raw/master/sample.mov"),
 				"mime_types" => array("video/quicktime"),
 			),
 			array(
-				"urls" => array("https://filesamples.com/samples/video/wmv/sample_640x360.wmv"),
+				"urls" => array("https://github.com/projectivetech/media-samples/raw/master/sample.wmv"),
 				"mime_types" => array("video/x-ms-asf"),
 			),
 			array(
-				"urls" => array("https://filesamples.com/samples/video/avi/sample_640x360.avi"),
+				"urls" => array("https://github.com/projectivetech/media-samples/raw/master/sample.avi"),
 				"mime_types" => array("video/x-msvideo"),
 			),
 			array(
-				"urls" => array("https://filesamples.com/samples/video/mp4/sample_640x360.mp4"),
+				"urls" => array("https://github.com/projectivetech/media-samples/raw/master/sample.mp4"),
 				"mime_types" => array("video/mp4"),
 			),
 			array(
@@ -624,5 +624,28 @@ class TcFiles extends TcBase{
 
 		rmdir($dir);
 		unlink($file);
+	}
+
+	function test_WriteToCacheFile(){
+		$ret = Files::WriteToCacheFile("temp/cache_file","Cache_Content",$err,$err_str);
+		$this->assertFalse($err);
+		$this->assertEquals(null,$err_str);
+		$this->assertEquals(13,$ret);
+		
+		$this->assertTrue(file_exists("temp/cache_file"));
+		$this->assertEquals("Cache_Content",Files::GetFileContent("temp/cache_file"));
+
+		//
+
+		$ret = @Files::WriteToCacheFile("non_existing_dir/cache_file","Cache_Content",$err,$err_str);
+		$this->assertTrue($err);
+		$this->assertContains("failed to open file for writing",$err_str);
+		$this->assertEquals(0,$ret);
+
+		$this->assertFalse(file_exists("non_existing_dir/cache_file"));
+
+		// Cleaning
+
+		unlink("temp/cache_file");
 	}
 }
