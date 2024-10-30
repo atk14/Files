@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.5] - 2024-10-30
+
+* 9d7646f - Using Imagick to determine mime type
+
 ## [1.6.4] - 2023-09-12
 
 * 3b50949 - Added method Files::WriteToCacheFile()
