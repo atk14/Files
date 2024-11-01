@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.6] - 2024-11-01
+
+* 7d469c4 - Added list of mime types with no doubt about the file suffix
+
 ## [1.6.5] - 2024-10-30
 
 * 9d7646f - Using Imagick to determine mime type
