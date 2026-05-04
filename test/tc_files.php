@@ -23,14 +23,9 @@ class TcFiles extends TcBase{
 		$this->assertEquals(448,$height);
 
 		list($width,$height) = Files::GetImageSize("sample_files/sample.webp",$err,$err_str);
-		if(PHP_VERSION_ID>=70100){
-			// getimagesize() CHANGELOG: 7.1.0 Added WebP support.
-			$this->assertEquals(50,$width);
-			$this->assertEquals(38,$height);
-		}else{
-			$this->assertEquals(null,$width);
-			$this->assertEquals(null,$height);
-		}
+		// getimagesize() CHANGELOG: 7.1.0 Added WebP support.
+		$this->assertEquals(50,$width);
+		$this->assertEquals(38,$height);
 
 		$hlava = Files::GetFileContent("hlava.jpg",$err,$err_str);
 		$this->assertEquals(26130,strlen($hlava));
