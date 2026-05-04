@@ -383,9 +383,9 @@ class TcFiles extends TcBase{
 				$filename = $url;
 				$filename = preg_replace('/\?.*$/','',$filename);
 				$filename = preg_replace('/^.*\//','',$filename);
-				$uf = new UrlFetcher($url);
-				$this->assertTrue($uf->found(),"NOT FOUND: $url ({$uf->getErrorMessage()})");
-				$file = Files::WriteToTemp($uf->getContent());
+				$content = file_get_contents($url);
+				$this->assertTrue($content !== false, "NOT FOUND: $url");
+				$file = Files::WriteToTemp($content);
 				$mime_type = Files::DetermineFileType($file,array("original_filename" => $filename));
 				$this->assertTrue(in_array($mime_type,$mime_types),"$url - $mime_type not in [".join(", ",$mime_types)."]");
 				unlink($file);
