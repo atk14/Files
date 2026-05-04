@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.7] - 2026-05-04
+
+* 21f0e71 - The backtick operator replaced with shell_exec
+
 ## [1.6.6] - 2024-11-01
 
 * 7d469c4 - Added list of mime types with no doubt about the file suffix
