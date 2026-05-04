@@ -516,7 +516,7 @@ class Files{
 	 * @internal We should consider making this method private
 	 *
 	 */
-	static function _RecursiveUnlinkDir($dir,&$error,&$error_str){
+	static protected function _RecursiveUnlinkDir($dir,&$error,&$error_str){
 		settype($dir,"string");
 		
 		$out = 0;
@@ -1046,7 +1046,7 @@ class Files{
 	/**
 	 * $filename = Files::_NormalizeFilename("/path/to//project//../tmp//attachments//"); // "/path/to/tmp/attachments/"
 	 */
-	static function _NormalizeFilename($filename){
+	static protected function _NormalizeFilename($filename){
 		$_filename = "";
 		while(1){
 			$_filename = preg_replace('/[^\/]+\/+\.\.\//','/',$filename); // "/path/to/dir/../tmp/images/" -> "/path/to/tmp/images/"
