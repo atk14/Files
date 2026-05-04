@@ -18,13 +18,19 @@ class TcFiles extends TcBase{
 	}
 
 	function test_get_image_size(){
+		$gd_info = gd_info();
+
 		list($width,$height) = Files::GetImageSize("hlava.jpg",$err,$err_str);
 		$this->assertEquals(325,$width);
 		$this->assertEquals(448,$height);
 
 		list($width,$height) = Files::GetImageSize("sample_files/sample.webp",$err,$err_str);
-		$this->assertEquals(50,$width);
-		$this->assertEquals(38,$height);
+		if(empty($gd_info["WebP Support"])){
+			file_put_contents("php://stderr","\nWARNING: No WebP support\n");
+		}else{
+			$this->assertEquals(50,$width);
+			$this->assertEquals(38,$height);
+		}
 
 		$hlava = Files::GetFileContent("hlava.jpg",$err,$err_str);
 		$this->assertEquals(26130,strlen($hlava));
@@ -37,8 +43,12 @@ class TcFiles extends TcBase{
 		$this->assertEquals(2358,strlen($image));
 		$this->assertEquals("c417b6553db97185609e3dc5925d8a42",md5($image));
 		list($width,$height) = Files::GetImageSizeByContent($image,$err,$err_str);
-		$this->assertEquals(50,$width);
-		$this->assertEquals(38,$height);
+		if(empty($gd_info["WebP Support"])){
+			file_put_contents("php://stderr","\nWARNING: No WebP support\n");
+		}else{
+			$this->assertEquals(50,$width);
+			$this->assertEquals(38,$height);
+		}
 
 		$hlava = "xxxxxxxxxxxxxxxxx";
 		$this->assertNull(Files::GetImageSizeByContent($hlava,$err,$err_str));
