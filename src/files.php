@@ -745,7 +745,7 @@ class Files{
 			return null;
 		}
 		$out = Files::GetImageSize($filename,$error,$error_str);
-		Files::Unlink($filename,$error,$error_str);
+		Files::Unlink($filename);
 		return $out;
 	}
 
