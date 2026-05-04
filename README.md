@@ -1,7 +1,7 @@
 Files
 =====
 
-[![Build Status](https://travis-ci.org/atk14/Files.svg?branch=master)](https://travis-ci.org/atk14/Files)
+[![Tests](https://github.com/atk14/Files/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/atk14/Files/actions/workflows/tests.yml)
 
 A PHP class for basic file manipulation.
 
