@@ -962,8 +962,6 @@ class Files{
 	/**
 	 * Find files in the given directory according to a regular pattern and other criteria
 	 *
-	 * TODO: Currently only regular files are being found just in the given directory
-	 *
 	 *	$files = Files::FindFiles('./log/',array(
 	 * 		'pattern' => '/^.*\.(log|err)$/'
 	 *	));
