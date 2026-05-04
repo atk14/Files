@@ -151,9 +151,6 @@ class Files{
 		if(mkdir($dirname,self::GetDefaultDirPerms(),true)){
 			$out = 1;
 		}else{
-			if(preg_match('/^5\.3\./',phpversion())){
-				return 1; // HACK for PHP5.3 - to be removed
-			}
 			$error = true;
 			$error_str = "can't create directory $dirname";
 		}
@@ -599,7 +596,7 @@ class Files{
 		}
 
 		if(!is_readable($filename)){
-			$error = false;
+			$error = true;
 			$error_str = "file $filename is not readable";
 			return null;
 		}
@@ -609,7 +606,7 @@ class Files{
 
 		$f = fopen($filename,"r");
 		if(!$f){
-			$error = false;
+			$error = true;
 			$error_str = "can't open file $filename for reading";
 			return null;
 		}
@@ -813,7 +810,7 @@ class Files{
 	 * @return string
 	 */
 	static function GetTempDir(){
-		$temp_dir = (defined("TEMP") && strlen("TEMP")) ? (string)TEMP : sys_get_temp_dir();
+		$temp_dir = (defined("TEMP") && strlen((string)constant("TEMP"))) ? (string)constant("TEMP") : sys_get_temp_dir();
 		if(!strlen($temp_dir)){
 			$temp_dir = "/tmp";
 		}
