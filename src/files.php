@@ -667,8 +667,7 @@ class Files{
 		// preserve obsolete usage - first part
 		// TODO: to be removed
 		if(!class_exists("TypeError")){
-			// for PHP5
-			eval("class TypeError extends Exception { }");
+			class TypeError extends Exception {}
 		}
 		$tmp_file_created = false;
 		try {
