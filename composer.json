@@ -1,8 +1,8 @@
 {
         "name": "atk14/files",
         "type": "library",
-        "description": "A PHP class for basic file manipulation",
-        "keywords": ["file","files"],
+        "description": "A PHP class providing static methods for reading, writing, copying, moving, and deleting files and directories, MIME type detection, image size detection, and file permission management",
+        "keywords": ["file","files","filesystem","mime","permissions","upload"],
         "homepage": "https://github.com/atk14/Files",
         "license": ["MIT"],
         "authors": [
