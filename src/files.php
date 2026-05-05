@@ -664,11 +664,6 @@ class Files{
 	 *
 	 */
 	static function GetImageSize($filename,&$error = null,&$error_str = null){
-		// preserve obsolete usage - first part
-		// TODO: to be removed
-		if(!class_exists("TypeError")){
-			class TypeError extends Exception {}
-		}
 		$tmp_file_created = false;
 		try {
 			$file_exists = @file_exists($filename);
@@ -1048,4 +1043,9 @@ class Files{
 
 		return $filename;
 	}
+}
+
+// preserve obsolete usage - first part
+if(!class_exists("TypeError")){
+	class TypeError extends Exception {}
 }
