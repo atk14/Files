@@ -88,7 +88,7 @@ class Files{
 
 		$perms = is_dir($filename) ? self::GetDefaultDirPerms() : self::GetDefaultFilePerms();
 		
-		$_old_umask = umask(0);
+	{	$_old_umask = umask(0);
 		$_stat = chmod($filename,$perms);
 		umask($_old_umask);
 
@@ -629,13 +629,24 @@ class Files{
 		$_UID_ = posix_getuid();
 		$_FILE_OWNER = fileowner($filename);
 		$_FILE_PERMS = fileperms($filename);
-		if(!(
-			(($_FILE_OWNER!=$_UID_) && (((int)$_FILE_PERMS&(int)bindec("110")))==(int)bindec("110")) ||
-			(($_FILE_OWNER==$_UID_) && (((int)$_FILE_PERMS&(int)bindec("110000000"))==(int)bindec("110000000")))
-		)){
-			return 0;
+
+		if($_FILE_OWNER === $_UID_){
+			// current user is the file owner — check owner r/w bits
+			return (($_FILE_PERMS & 0600) === 0600) ? 1 : 0;
 		}
-		return 1;
+
+		$_user_groups = posix_getgroups();
+		$_egid = posix_getegid();
+		if(!in_array($_egid,$_user_groups)){
+			$_user_groups[] = $_egid;
+		}
+		if(in_array(filegroup($filename),$_user_groups)){
+			// current user is a member of the file's group — check group r/w bits
+			return (($_FILE_PERMS & 0060) === 0060) ? 1 : 0;
+		}
+
+		// fall back to "other" r/w bits
+		return (($_FILE_PERMS & 0006) === 0006) ? 1 : 0;
 	}
 
 	/**

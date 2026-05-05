@@ -684,4 +684,26 @@ class TcFiles extends TcBase{
 
 		unlink("temp/cache_file");
 	}
+
+	function test_IsReadableAndWritable(){
+		$non_readable_file = TEMP."/non_readable_file";
+		if(file_exists($non_readable_file)){
+			$_old_umask = umask(0);
+			$_stat = chmod($non_readable_file,644);
+			umask($_old_umask);
+			unlink($non_readable_file);
+		}
+
+		$this->assertFalse(file_exists($non_readable_file));
+
+		copy("hlava.jpg",$non_readable_file);
+		$this->assertTrue(file_exists(TEMP."/non_readable_file"));
+		$_old_umask = umask(0);
+		$_stat = chmod($non_readable_file,0);
+		umask($_old_umask);
+
+		$this->assertEquals(1,Files::IsReadableAndWritable("hlava.jpg"));
+		$this->assertEquals(0,Files::IsReadableAndWritable($non_readable_file));
+		$this->assertEquals(0,Files::IsReadableAndWritable("non_existing_file.txt"));
+	}
 }
