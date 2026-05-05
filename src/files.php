@@ -594,24 +594,11 @@ class Files{
 		$filesize = filesize($filename);
 		if($filesize==0){ return ""; }
 
-		$f = fopen($filename,"r");
-		if(!$f){
-			$error = true;
-			$error_str = "can't open file $filename for reading";
-			return null;
-		}
-		$out = fread($f,$filesize);
-		fclose($f);
+		$out = file_get_contents($filename);
 
-		if(strlen($out)==0){
+		if($out===false){
 			$error = true;
 			$error_str = "can't read from file $filename";
-			return null;
-		}
-
-		if(strlen($out)!=$filesize){
-			$error = true;
-			$error_str = "can't read $filesize bytes from $filename (it was read ".strlen($out).")";
 			return null;
 		}
 
