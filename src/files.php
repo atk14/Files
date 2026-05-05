@@ -853,6 +853,7 @@ class Files{
 		}elseif(function_exists("finfo_open")){
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
 			$mime_type = finfo_file($finfo, $filename);
+			finfo_close($finfo);
 		}else{
 			$command = "file -i ".escapeshellarg($filename);
 			$out = shell_exec($command);
