@@ -196,34 +196,24 @@ class Files{
 
 		settype($from_file,"string");
 		settype($to_file,"string");
-		
-		$in = fopen($from_file,"r");
-		if(!$in){
+
+		if(!file_exists($from_file)){
 			$error = true;
-			$error_str = "can't open input file for reading";
-			return $bytes;
-		}
-		$__target_file_exists = false;
-		if(file_exists($to_file)){
-			$__target_file_exists = true;
-		}
-		$out = fopen($to_file,"w");
-		if(!$out){
-			$error = true;
-			$error_str = "can't open output file for writing";
+			$error_str = "input file $from_file doesn't exist";
 			return $bytes;
 		}
 
-		$buffer = "";
-		while(!feof($in) && $in){
-			$buffer = fread($in,4096);
-			fwrite($out,$buffer,strlen($buffer));
-			$bytes += strlen($buffer);
+		$__target_file_exists = file_exists($to_file);
+
+		$stat = copy($from_file, $to_file);
+
+		if(!$stat){
+			$error = true;
+			$error_str = "can't copy file";
+			return $bytes;
 		}
 
-		
-		fclose($in);
-		fclose($out);
+		$bytes = filesize($to_file);
 		
 		//menit mod souboru, jenom, kdyz soubor drive neexistoval
 		if(!$__target_file_exists){

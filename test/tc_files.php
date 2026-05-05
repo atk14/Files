@@ -14,7 +14,30 @@ class TcFiles extends TcBase{
 		$this->assertTrue($err);
 		$this->assertEquals("non_existing_file.txt is not a file",$err_str);
 		$this->assertTrue($content === null);
+	}
 
+	function test_copy_file(){
+		$to_file = TEMP . "/outfile";
+		if(file_exists($to_file)){ unlink($to_file); }
+
+		$this->assertFalse(file_exists($to_file));
+
+		$bytes = Files::CopyFile("hlava.jpg",$to_file,$err,$err_str);
+		$this->assertFalse($err);
+		$this->assertEquals("",$err_str);
+		$this->assertEquals(26130,$bytes);
+		clearstatcache();
+		$this->assertEquals("666",substr(decoct(fileperms($to_file)),-3));
+
+		$bytes = Files::CopyFile("non_existing_file.txt",$to_file,$err,$err_str);
+		$this->assertTrue($err);
+		$this->assertEquals("input file non_existing_file.txt doesn't exist",$err_str);
+		$this->assertEquals(0,$bytes);
+
+		$bytes = @Files::CopyFile("hlava.jpg","/non_existing_dir/outfile",$err,$err_str);
+		$this->assertTrue($err);
+		$this->assertEquals("can't copy file",$err_str);
+		$this->assertEquals(0,$bytes);
 	}
 
 	function test_get_image_size(){
