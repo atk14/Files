@@ -215,7 +215,7 @@ class Files{
 
 		$bytes = filesize($to_file);
 		
-		//menit mod souboru, jenom, kdyz soubor drive neexistoval
+		// change file permissions only when the file didn't exist before
 		if(!$__target_file_exists){
 			$_old_umask = umask(0);
 			$_stat = chmod($to_file,self::GetDefaultFilePerms());
@@ -289,7 +289,7 @@ class Files{
 		}
 		fclose($f);
 
-		//menit mod souboru, jenom, kdyz soubor drive neexistoval
+		// change file permissions only when the file didn't exist before
 		if(!$_file_exists){
 			$_old_umask = umask(0);
 			$_stat = chmod($file,self::GetDefaultFilePerms());
@@ -396,7 +396,7 @@ class Files{
 		if(fileowner($filename)!=posix_getuid() && !fileowner($filename)){
 			return false;
 		}
-		// nasl. podminka byla vyhozena - uzivatel prece muze uploadnout prazdny soubor...
+		// the following condition was removed — the user can upload an empty file...
 		//if(filesize($filename)==0){
 		//	return false;
 		//}
@@ -539,7 +539,7 @@ class Files{
 			}
 			if(is_dir($dir.$item)){
 				$out += Files::_RecursiveUnlinkDir($dir.$item,$error,$error_str);
-				//2005-10-21: nasledujici continue tady chybel, skript se proto chybne pokousel volat fci unlink na adresar
+				//2005-10-21: the continue below was missing here; without it the code incorrectly tried to call unlink() on a directory
 				continue;
 			}
 			if($error){ break; }
