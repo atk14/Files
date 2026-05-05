@@ -326,6 +326,7 @@ class Files{
 		}
 		self::MoveFile($cache_file,$file,$error,$error_str);
 		if($error){
+			Files::Unlink($cache_file);
 			return 0;
 		}
 		return $ret;
