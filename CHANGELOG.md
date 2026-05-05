@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.6.9] - 2026-05-05
+
+* Broken version 1.6.8 fixed
+
 ## [1.6.8] - 2026-05-05
 
 * 1a61513 - Package is compatible with PHP>=5.6
