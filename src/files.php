@@ -88,7 +88,7 @@ class Files{
 
 		$perms = is_dir($filename) ? self::GetDefaultDirPerms() : self::GetDefaultFilePerms();
 		
-	{	$_old_umask = umask(0);
+		$_old_umask = umask(0);
 		$_stat = chmod($filename,$perms);
 		umask($_old_umask);
 
