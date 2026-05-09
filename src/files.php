@@ -26,7 +26,7 @@ if(defined("FILES_DEFAULT_DIR_PERMS")){
  */
 class Files{
 
-	const VERSION = "1.6.10";
+	const VERSION = "1.6.11";
 
 	static protected $_DefaultFilePerms = 0666;
 
